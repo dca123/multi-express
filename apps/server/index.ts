@@ -1,6 +1,6 @@
 import express from "express";
 import { porkApi } from "../pork/app";
-
+import { trpc } from "../beef/index";
 export const app = express();
 
 app.get("/info", (req, res) => {
@@ -9,6 +9,7 @@ app.get("/info", (req, res) => {
   });
 });
 
+app.use(trpc);
 porkApi(app);
 
 app.listen(3000, () => {
