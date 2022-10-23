@@ -33,17 +33,19 @@ export const IndexPage = () => {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Routing Controllers + TRPC + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <br />
+        <br />
+        <h2>TRPC</h2>
         <p>{data.data}</p>
+        <br />
+        <h2>Routing Controllers</h2>
         <p>{baconData?.info}</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 };
