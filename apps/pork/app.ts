@@ -1,6 +1,6 @@
 // this shim is required
-import { createExpressServer } from 'routing-controllers';
-import { PorkController } from './porkController';
+import { createExpressServer } from "routing-controllers";
+import { PorkController } from "./porkController";
 
 // creates express app, registers all controller routes and returns you express app instance
 const app = createExpressServer({
