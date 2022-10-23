@@ -1,5 +1,7 @@
 import { Get, JsonController } from "routing-controllers";
+import { Service } from "typedi";
 
+@Service()
 @JsonController("/v1")
 export class PorkController {
   @Get("/info")
