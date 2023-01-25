@@ -12,7 +12,7 @@ const baconApi = async () => {
 
 export const IndexPage = () => {
   const [count, setCount] = useState(0);
-  const { isLoading, isError, data } = trpc.getBeef.useQuery("hello");
+  const { isLoading, isError, data } = trpc.getPork.useQuery("hello");
   const { data: baconData } = useQuery(["bacon"], baconApi);
 
   if (isLoading) {

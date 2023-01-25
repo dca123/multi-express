@@ -1,7 +1,10 @@
 import { inferAsyncReturnType, initTRPC } from "@trpc/server";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { z } from "zod";
-const t = initTRPC.create();
+import { generateOpenApiDocument, OpenApiMeta } from 'trpc-openapi';
+import { writeFileSync } from 'fs';
+
+const t = initTRPC.meta<OpenApiMeta>().create();
 
 const createContext = ({
   req,
@@ -10,6 +13,12 @@ const createContext = ({
 type Context = inferAsyncReturnType<typeof createContext>;
 
 const appRouter = t.router({
+  getPork: t.procedure.input(z.string()).query((req) => {
+    return {
+      id: req.input,
+      data: "Porkies",
+    };
+  }),
   getBeef: t.procedure.input(z.string()).query((req) => {
     return {
       id: req.input,
@@ -17,6 +26,14 @@ const appRouter = t.router({
     };
   }),
 });
+
+const document = generateOpenApiDocument(appRouter, {
+  title: 'tRPC OpenAPI',
+  version: '1.0.0',
+  baseUrl: 'http://localhost:3000',
+});
+writeFileSync('openapi_beef.json', JSON.stringify(document, null, 2));
+
 
 export const trpc = trpcExpress.createExpressMiddleware({
   router: appRouter,
